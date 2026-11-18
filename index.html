@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sheepshead Trainer</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>Sheepshead</h1>
+    <nav>
+      <button id="btn-new" type="button">New game</button>
+      <button id="btn-settings" type="button">Settings</button>
+      <button id="btn-rules" type="button">Rules</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="scorebar" aria-label="Scores"></section>
+
+    <section id="table" aria-label="Card table">
+      <div id="seats"></div>
+      <div id="center">
+        <div id="trick"></div>
+        <div id="banner" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="hand" aria-label="Your hand"></section>
+
+    <section id="panel">
+      <p id="message" aria-live="polite"></p>
+      <div id="controls"></div>
+      <div id="hint" hidden></div>
+      <div id="odds" hidden></div>
+    </section>
+
+    <details id="log-wrap">
+      <summary>What happened this hand</summary>
+      <ol id="log"></ol>
+    </details>
+  </main>
+
+  <footer>Made by Ev for Dad. Built with help from Claude.</footer>
+
+  <dialog id="settings-dialog">
+    <form id="settings-form" method="dialog">
+      <h2>Settings</h2>
+      <label>Your name <input name="playerName" maxlength="16"></label>
+      <fieldset>
+        <legend>Players</legend>
+        <label><input type="radio" name="numPlayers" value="3"> 3</label>
+        <label><input type="radio" name="numPlayers" value="4"> 4</label>
+        <label><input type="radio" name="numPlayers" value="5"> 5</label>
+      </fieldset>
+      <label>Picker's partner
+        <select name="partnerMode">
+          <option value="calledAce">Call an ace</option>
+          <option value="jackOfDiamonds">Jack of diamonds</option>
+          <option value="alone">Picker always alone</option>
+        </select>
+      </label>
+      <p class="note">Three players: the picker always plays alone.</p>
+      <label>If nobody picks
+        <select name="noPick">
+          <option value="doubler">Doubler (next hand counts double)</option>
+          <option value="redeal">Just redeal</option>
+        </select>
+      </label>
+      <label class="check"><input type="checkbox" name="doublersStack"> Doublers stack (two in a row = ×4)</label>
+      <label class="check"><input type="checkbox" name="booMauers"> Boo the mowers when nobody picks</label>
+      <div class="row">
+        <label>Mower, 5 players: good trump <input type="number" name="mauerGoodTrump" min="2" max="8"></label>
+        <label>Mower, 3–4 players: counters <input type="number" name="mauerCounters" min="2" max="8"></label>
+      </div>
+      <label class="check"><input type="checkbox" name="lastHandDoubler"> Declared last hand is a doubler</label>
+      <label class="check"><input type="checkbox" name="hints"> Show hints</label>
+      <label class="check"><input type="checkbox" name="odds"> Show odds for each card</label>
+      <label class="check"><input type="checkbox" name="highlightTrump"> Outline trump in gold</label>
+      <label>Computer speed
+        <select name="botSpeed">
+          <option value="slow">Slow</option>
+          <option value="normal">Normal</option>
+          <option value="fast">Fast</option>
+        </select>
+      </label>
+      <p class="note">Changing players or rules starts a new game.</p>
+      <menu>
+        <button value="cancel" type="submit" formnovalidate>Cancel</button>
+        <button value="save" type="submit" class="primary">Save</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <dialog id="confirm-dialog">
+    <form method="dialog">
+      <p id="confirm-text"></p>
+      <menu>
+        <button value="no" type="submit">Cancel</button>
+        <button value="yes" type="submit" class="primary" id="confirm-yes">Yes</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <dialog id="rules-dialog">
+    <div id="rules-body"></div>
+    <form method="dialog"><menu><button class="primary">Close</button></menu></form>
+  </dialog>
+
+  <script type="module" src="js/ui.js"></script>
+</body>
+</html>
